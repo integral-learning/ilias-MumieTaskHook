@@ -23,15 +23,16 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin {
             case 'beforeLogout':
                 $userId = $parameters["user_id"];
                 include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskSSOToken.php');
-                if (ilMumieTaskSSOToken::tokenExistsForUser($userId)) {
-                    ilMumieTaskSSOToken::invalidateTokenForUser($userId);
-                    $log = ilLoggerFactory::getLogger('xmum')->log("_____________________________________token found");
-                    $this->logoutFromAllServers($userId);
+                include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskIdHashingService.php');
+                $hashedId = ilMumieTaskIdHashingService::getHashForUser($userId);
+                if (ilMumieTaskSSOToken::tokenExistsForUser($hashedId)) {
+                    ilMumieTaskSSOToken::invalidateTokenForUser($hashedId);
+                    $this->logoutFromAllServers();
                 }
         }
     }
 
-    private function logoutFromAllServers($userId) {
+    private function logoutFromAllServers() {
         include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskServer.php');
         $logoutUrls = array_map(function ($server) {
             return $server->getLogoutUrl();
@@ -41,7 +42,6 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin {
         $redirecturl = ILIAS_HTTP_PATH . "/Customizing/global/plugins/Services/EventHandling/EventHook/MumieTaskHook/prelogout.php?logoutUrl="
         . json_encode($logoutUrls)
             . "&redirect=" . $returnUrl;
-        ilLoggerFactory::getLogger('xmum')->info("_____________________________________________" . $redirecturl);
         $this->redirect($redirecturl);
     }
 
