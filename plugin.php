@@ -17,5 +17,3 @@ $ilias_max_version = "5.4.6";
 // optional, but useful: Add one or more responsible persons and a contact email
 $responsible = "Tobias Goltz";
 $responsible_mail = "contact@integral-learning.de";
-
-?>

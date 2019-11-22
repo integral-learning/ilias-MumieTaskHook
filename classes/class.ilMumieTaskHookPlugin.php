@@ -1,13 +1,15 @@
 <?php
-include_once ("./Services/EventHandling/classes/class.ilEventHookPlugin.php");
-class ilMumieTaskHookPlugin extends ilEventHookPlugin {
+include_once("./Services/EventHandling/classes/class.ilEventHookPlugin.php");
+class ilMumieTaskHookPlugin extends ilEventHookPlugin
+{
     /**
      * Get Plugin Name. Must be same as in class name il<Name>Plugin
      * and must correspond to plugins subdirectory name.
      *
      * @return    string    Plugin Name
      */
-    final function getPluginName() {
+    final public function getPluginName()
+    {
         return "MumieTaskHook";
     }
 
@@ -16,14 +18,18 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin {
      * @param string $event
      * @param array  $parameters
      */
-    public function handleEvent($component, $event, $parameters) {
-        include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/debugToConsole.php');
+    public function handleEvent($component, $event, $parameters)
+    {
+        global $ilPluginAdmin;
+        if (!$ilPluginAdmin->isActive(IL_COMP_SERVICE, "Repository", "robj", "MumieTask")) {
+            return;
+        }
 
         switch ($event) {
             case 'beforeLogout':
                 $userId = $parameters["user_id"];
-                include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskSSOToken.php');
-                include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskIdHashingService.php');
+                include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskSSOToken.php');
+                include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskIdHashingService.php');
                 $hashedId = ilMumieTaskIdHashingService::getHashForUser($userId);
                 if (ilMumieTaskSSOToken::tokenExistsForUser($hashedId)) {
                     ilMumieTaskSSOToken::invalidateTokenForUser($hashedId);
@@ -32,8 +38,9 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin {
         }
     }
 
-    private function logoutFromAllServers() {
-        include_once ('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskServer.php');
+    private function logoutFromAllServers()
+    {
+        include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskServer.php');
         $logoutUrls = array_map(function ($server) {
             return $server->getLogoutUrl();
         }, ilMumieTaskServer::getAllServers());
@@ -45,7 +52,8 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin {
         $this->redirect($redirecturl);
     }
 
-    private function redirect($url, $statusCode = 303) {
+    private function redirect($url, $statusCode = 303)
+    {
         header('Location: ' . $url, true, $statusCode);
         die();
     }
@@ -54,8 +62,8 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin {
      * Object initialization. Can be overwritten by plugin class
      * (and should be made private final)
      */
-    protected function init() {
+    protected function init()
+    {
         // nothing to do
     }
 }
-?>
