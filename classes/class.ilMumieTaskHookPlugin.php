@@ -1,4 +1,12 @@
 <?php
+/**
+ * MumieTaskHook plugin
+ *
+ * @copyright   2019 integral-learning GmbH (https://www.integral-learning.de/)
+ * @author      Tobias Goltz (tobias.goltz@integral-learning.de)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 include_once("./Services/EventHandling/classes/class.ilEventHookPlugin.php");
 class ilMumieTaskHookPlugin extends ilEventHookPlugin
 {
@@ -38,6 +46,9 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
         }
     }
 
+    /**
+     * Send a logout request for the current user to all configured MUMIE servers
+     */
     private function logoutFromAllServers()
     {
         include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskServer.php');
