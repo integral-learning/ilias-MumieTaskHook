@@ -7,7 +7,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$logouturls = $_GET["logoutUrl"];
+$logouturls = urldecode($_GET["logoutUrl"]);
 $redirect = json_encode($_GET["redirect"]);
 ?>
 
