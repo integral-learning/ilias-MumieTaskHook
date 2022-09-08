@@ -37,7 +37,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
             case 'beforeLogout':
                 $userId = $parameters["user_id"];
                 include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskSSOToken.php');
-                if(ilMumieTaskSSOToken::invalidateAllTokenForUser($userId))
+                if(ilMumieTaskSSOToken::invalidateAllTokensForUser($userId))
                 {
                     ilLoggerFactory::getLogger('xmum')->info("LOGOUT FROM SERVER");
                     $this->logoutFromAllServers();
