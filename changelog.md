@@ -1,6 +1,10 @@
 # MumieTaskHook - Changelog
 
 All important changes to this plugin will be documented in this file.
+## [V1.0.3] - 2022-09-09
+## Changed
+- MumieTaskHook now also invalidates SSO tokens created for MUMIE Tasks with private gradepool during logout
+  
 ## [V1.0.3] - 2021-08-26
 ## Changed
 - MumieTaskHook now supports Ilias up to version 6.10
