@@ -1,7 +1,7 @@
 # MumieTaskHook - Changelog
 
 All important changes to this plugin will be documented in this file.
-## [V1.0.3] - 2022-09-09
+## [V1.0.4] - XXX
 ## Changed
 - MumieTaskHook now also invalidates SSO tokens created for MUMIE Tasks with private gradepool during logout
   
