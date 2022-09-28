@@ -37,10 +37,8 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
             case 'beforeLogout':
                 $userId = $parameters["user_id"];
                 include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskSSOToken.php');
-                include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskIdHashingService.php');
-                $hashedId = ilMumieTaskIdHashingService::getHashForUser($userId);
-                if (ilMumieTaskSSOToken::tokenExistsForUser($hashedId)) {
-                    ilMumieTaskSSOToken::invalidateTokenForUser($hashedId);
+                if (ilMumieTaskSSOToken::tokenExistsForIliasUser($userId)) {
+                    ilMumieTaskSSOToken::invalidateAllTokensForUser($userId);
                     $this->logoutFromAllServers();
                 }
         }
