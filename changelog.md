@@ -3,7 +3,7 @@
 All important changes to this plugin will be documented in this file.
 ## [V2.0.0] - 2022-09-28
 ### Requirement
-This plugin now requires MumieTask 2.2.0 to function. If you're using an older version of MumieTask, please stick to version v1.0.3 
+This plugin now requires MumieTask 2.1.0 to function. If you're using an older version of MumieTask, please stick to version v1.0.3 
 
 ### Changed
 - MumieTaskHook now also invalidates SSO tokens created for MUMIE Tasks with private gradepool during logout
