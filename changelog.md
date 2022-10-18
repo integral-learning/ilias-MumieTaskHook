@@ -1,6 +1,10 @@
 # MumieTaskHook - Changelog
 
 All important changes to this plugin will be documented in this file.
+## [V2.0.1] - 2020-10-18:
+### Added
+- Plugin now supports Ilias v7.14 
+
 ## [V2.0.0] - 2022-09-28
 ### Requirement
 This plugin now requires MumieTask 2.1.0 to function. If you're using an older version of MumieTask, please stick to version v1.0.3 
