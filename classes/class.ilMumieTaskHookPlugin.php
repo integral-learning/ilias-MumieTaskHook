@@ -8,8 +8,7 @@
  */
 
 include_once("./Services/EventHandling/classes/class.ilEventHookPlugin.php");
-class ilMumieTaskHookPlugin extends ilEventHookPlugin
-{
+class ilMumieTaskHookPlugin extends ilEventHookPlugin{
     /**
      * Get Plugin Name. Must be same as in class name il<Name>Plugin
      * and must correspond to plugins subdirectory name.
