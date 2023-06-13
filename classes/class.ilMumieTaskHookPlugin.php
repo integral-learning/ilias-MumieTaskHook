@@ -16,7 +16,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
      *
      * @return    string    Plugin Name
      */
-    final public function getPluginName() : string
+    final public function getPluginName(): string
     {
         return "MumieTaskHook";
     }
@@ -26,8 +26,8 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
      * @param string $event
      * @param array  $parameters
      */
-    public function handleEvent($a_component, $a_event, $a_parameter) : void
-{
+    public function handleEvent($a_component, $a_event, $a_parameter): void
+    {
         global $ilPluginAdmin;
         if (!$ilPluginAdmin->isActive(IL_COMP_SERVICE, "Repository", "robj", "MumieTask")) {
             return;
@@ -71,7 +71,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
      * Object initialization. Can be overwritten by plugin class
      * (and should be made private final)
      */
-    protected function init() : void
+    protected function init(): void
     {
         // nothing to do
     }
