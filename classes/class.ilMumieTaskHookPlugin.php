@@ -29,7 +29,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     public function handleEvent($a_component, $a_event, $a_parameter) : void
 {
         global $ilPluginAdmin;
-        if (!$ilPluginAdmin->isActive(IL_COMP_SERVICE, "Repository", "robj", "MumieTask")) {
+        if (!$ilPluginAdmin->isActive(ilComponentInfo::TYPE_SERVICES, "Repository", "robj", "MumieTask")) {
             return;
         }
 
