@@ -23,8 +23,8 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
 
     /**
      * @param string $a_component
-     * @param string $event
-     * @param array  $parameters
+     * @param string $a_event
+     * @param        $a_parameter
      */
     public function handleEvent($a_component, $a_event, $a_parameter): void
     {
