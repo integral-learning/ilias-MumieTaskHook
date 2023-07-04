@@ -16,26 +16,26 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
      *
      * @return    string    Plugin Name
      */
-    final public function getPluginName()
+    final public function getPluginName(): string
     {
         return "MumieTaskHook";
     }
 
     /**
-     * @param string $component
-     * @param string $event
-     * @param array  $parameters
+     * @param string $a_component
+     * @param string $a_event
+     * @param        $a_parameter
      */
-    public function handleEvent($component, $event, $parameters)
+    public function handleEvent($a_component, $a_event, $a_parameter): void
     {
         global $ilPluginAdmin;
-        if (!$ilPluginAdmin->isActive(IL_COMP_SERVICE, "Repository", "robj", "MumieTask")) {
+        if (!$ilPluginAdmin->isActive(ilComponentInfo::TYPE_SERVICES, "Repository", "robj", "MumieTask")) {
             return;
         }
 
-        switch ($event) {
+        switch ($a_event) {
             case 'beforeLogout':
-                $userId = $parameters["user_id"];
+                $userId = $a_parameter["user_id"];
                 include_once('Customizing/global/plugins/Services/Repository/RepositoryObject/MumieTask/classes/class.ilMumieTaskSSOToken.php');
                 if (ilMumieTaskSSOToken::tokenExistsForIliasUser($userId)) {
                     ilMumieTaskSSOToken::invalidateAllTokensForUser($userId);
@@ -71,7 +71,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
      * Object initialization. Can be overwritten by plugin class
      * (and should be made private final)
      */
-    protected function init()
+    protected function init(): void
     {
         // nothing to do
     }
