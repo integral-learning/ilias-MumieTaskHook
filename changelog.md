@@ -1,7 +1,7 @@
 # MumieTaskHook - Changelog
 
 All important changes to this plugin will be documented in this file.
-## [v2.3] - TODO
+## [v2.3] - 2023-07-10
 ### Changed
 - Plugin now supports Ilias v7.23
 
