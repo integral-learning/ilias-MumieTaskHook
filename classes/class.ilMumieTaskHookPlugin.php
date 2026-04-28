@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MumieTaskHook plugin
  *
