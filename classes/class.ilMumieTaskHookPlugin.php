@@ -64,10 +64,10 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
             return $server->getLogoutUrl();
         }, ilMumieTaskServer::getAllServers());
 
-        $returnUrl = ILIAS_HTTP_PATH.'/logout.php';
-        $redirecturl = ILIAS_HTTP_PATH.'/Customizing/global/plugins/Services/EventHandling/EventHook/MumieTaskHook/prelogout.php?logoutUrl='
-        .json_encode($logoutUrls)
-            .'&redirect='.$returnUrl;
+        $returnUrl = ILIAS_HTTP_PATH . '/logout.php';
+        $redirecturl = ILIAS_HTTP_PATH . '/Customizing/global/plugins/Services/EventHandling/EventHook/MumieTaskHook/prelogout.php?logoutUrl='
+        . json_encode($logoutUrls)
+            . '&redirect=' . $returnUrl;
         $this->redirect($redirecturl);
     }
 
