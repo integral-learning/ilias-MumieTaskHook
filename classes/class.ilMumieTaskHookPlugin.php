@@ -25,10 +25,12 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     }
 
     /**
+     * Handle the event
+     *
      * @throws ResponseSendingException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function handleEvent(string $a_component, string $a_event, $a_parameter): void
+    public function handleEvent(string $a_component, string $a_event, array $a_parameter): void
     {
         global $DIC;
         if (!$DIC['component.repository']->hasActivatedPlugin('xmum')) {
@@ -73,18 +75,12 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     }
 
     /**
-     * @throws ResponseSendingException
      */
     #[NoReturn]
     private function redirect(string $url): void
     {
         global $DIC;
-        $response = $DIC->http()->response()
-            ->withAddedHeader('Location', $url)
-            ->withStatus(303)
-        ;
-        $DIC->http()->saveResponse($response);
-        $DIC->http()->sendResponse();
-        $DIC->http()->close();
+
+        $DIC->ctrl()->redirectToURL($url);
     }
 }
