@@ -26,6 +26,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
 
     /**
      * @throws ResponseSendingException
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function handleEvent(string $a_component, string $a_event, $a_parameter): void
     {
