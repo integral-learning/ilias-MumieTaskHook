@@ -79,7 +79,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     private function redirect(string $url): void
     {
         global $DIC;
-        $response = $DIC->http()->{$this}->wrapper()
+        $response = $DIC->http()->response()
             ->withAddedHeader('Location', $url)
             ->withStatus(303)
         ;
