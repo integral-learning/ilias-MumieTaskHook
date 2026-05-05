@@ -6,7 +6,7 @@
  * @author      Tobias Goltz (tobias.goltz@integral-learning.de)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$logouturls = urldecode($_GET['logoutUrl']);
+$logouturls = $_GET['logoutUrl'];
 $redirect = json_encode($_GET['redirect']);
 ?>
 
