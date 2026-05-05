@@ -8,7 +8,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use ILIAS\HTTP\Response\Sender\ResponseSendingException;
 use JetBrains\PhpStorm\NoReturn;
 
 class ilMumieTaskHookPlugin extends ilEventHookPlugin
@@ -27,8 +26,8 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     /**
      * Handle the event
      *
-     * @throws ResponseSendingException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws ilCtrlException
      */
     public function handleEvent(string $a_component, string $a_event, array $a_parameter): void
     {
@@ -58,24 +57,29 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     /**
      * Send a logout request for the current user to all configured MUMIE servers.
      *
-     * @throws ResponseSendingException
+     * @throws ilCtrlException
      */
     #[NoReturn]
     private function logoutFromAllServers(): void
     {
+        global $DIC;
+
         $logoutUrls = array_map(function ($server) {
             return $server->getLogoutUrl();
         }, ilMumieTaskServer::getAllServers());
 
-        $returnUrl = ILIAS_HTTP_PATH . '/logout.php';
-        $redirecturl = ILIAS_HTTP_PATH . '/Customizing/global/plugins/Services/EventHandling/EventHook/MumieTaskHook/prelogout.php?logoutUrl='
-        . json_encode($logoutUrls)
-            . '&redirect=' . $returnUrl;
-        $this->redirect($redirecturl);
+        $ctrl = $DIC->ctrl();
+        $ctrl->setTargetScript('logout.php');
+        $returnUrl = $ctrl->getLinkTargetByClass([ilStartUpGUI::class], 'doLogout');
+        $ctrl->setTargetScript('ilias.php');
+
+        $redirectUrl = ILIAS_HTTP_PATH . '/Customizing/global/plugins/Services/EventHandling/EventHook/MumieTaskHook/prelogout.php'
+            . '?logoutUrl=' . urlencode(json_encode($logoutUrls))
+            . '&redirect=' . urlencode($returnUrl);
+
+        $this->redirect($redirectUrl);
     }
 
-    /**
-     */
     #[NoReturn]
     private function redirect(string $url): void
     {
