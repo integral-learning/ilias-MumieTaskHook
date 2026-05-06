@@ -13,13 +13,14 @@ $redirect = json_encode($_GET['redirect']);
 <script>
     const logouturls = Object.values(<?php echo $logouturls; ?>);
     const promises = [];
-    logouturls.forEach(function(url) {
+    logouturls.forEach(function (url) {
         promises.push(logoutFromServer(url));
     });
     Promise.all(promises)
-    .then(function () {
-        window.location.href =<?php echo $redirect; ?>;
-    });
+        .then(function () {
+            window.location.href =<?php echo $redirect; ?>;
+        });
+
     function logoutFromServer(url) {
         return new Promise(function (resolve) {
             const request = new XMLHttpRequest();
