@@ -24,9 +24,10 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
     }
 
     /**
-     * Handle the event
+     * Handle the event.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
      * @throws ilCtrlException
      */
     public function handleEvent(string $a_component, string $a_event, array $a_parameter): void
