@@ -7,9 +7,6 @@
  * @author      Tobias Goltz (tobias.goltz@integral-learning.de)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-use JetBrains\PhpStorm\NoReturn;
-
 class ilMumieTaskHookPlugin extends ilEventHookPlugin
 {
     /**
@@ -60,7 +57,6 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
      *
      * @throws ilCtrlException
      */
-    #[NoReturn]
     private function logoutFromAllServers(): void
     {
         global $DIC;
@@ -81,7 +77,6 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
         $this->redirect($redirectUrl);
     }
 
-    #[NoReturn]
     private function redirect(string $url): void
     {
         global $DIC;
