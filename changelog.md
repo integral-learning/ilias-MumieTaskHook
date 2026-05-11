@@ -2,6 +2,16 @@
 
 All important changes to this plugin will be documented in this file.
 
+## [v4.0] - 2026-05-11
+### Changed
+- Plugin now supports Ilias 9.18
+
+### Removed
+- Plugin no longer supports Ilias 8
+
+### Fixed
+- Fixed an issue where logging out triggered the MUMIE logout flow twice
+
 ## [v3.1] - 2023-07-10
 ### Changed
 - Plugin now supports Ilias 8.3
