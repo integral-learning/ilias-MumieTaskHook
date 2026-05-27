@@ -66,9 +66,7 @@ class ilMumieTaskHookPlugin extends ilEventHookPlugin
         }, ilMumieTaskServer::getAllServers());
 
         $ctrl = $DIC->ctrl();
-        $ctrl->setTargetScript('logout.php');
         $returnUrl = ILIAS_HTTP_PATH . '/' . $ctrl->getLinkTargetByClass([ilStartUpGUI::class], 'doLogout');
-        $ctrl->setTargetScript('ilias.php');
 
         $redirectUrl = ILIAS_HTTP_PATH . '/Customizing/global/plugins/Services/EventHandling/EventHook/MumieTaskHook/prelogout.php'
             . '?logoutUrl=' . urlencode(json_encode($logoutUrls))
