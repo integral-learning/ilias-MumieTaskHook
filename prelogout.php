@@ -6,12 +6,16 @@
  * @author      Tobias Goltz (tobias.goltz@integral-learning.de)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$logouturls = $_GET['logoutUrl'];
-$redirect = json_encode($_GET['redirect']);
+const JSON_ENCODE_FOR_SCRIPT = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+
+$decoded_logout_urls = json_decode($_GET['logoutUrl'] ?? '', true);
+$logout_urls = is_array($decoded_logout_urls) ? array_values(array_filter($decoded_logout_urls, 'is_string')) : [];
+
+$redirect = json_encode((string) ($_GET['redirect'] ?? ''), JSON_ENCODE_FOR_SCRIPT);
 ?>
 
 <script>
-    const logouturls = Object.values(<?php echo $logouturls; ?>);
+    const logouturls = Object.values(<?php echo json_encode($logout_urls, JSON_ENCODE_FOR_SCRIPT); ?>);
     const promises = [];
     logouturls.forEach(function (url) {
         promises.push(logoutFromServer(url));
