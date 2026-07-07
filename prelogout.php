@@ -6,12 +6,14 @@
  * @author      Tobias Goltz (tobias.goltz@integral-learning.de)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-const JSON_ENCODE_FOR_SCRIPT = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+const JSON_ENCODE_FOR_SCRIPT = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_THROW_ON_ERROR;
 
-$decoded_logout_urls = json_decode($_GET['logoutUrl'] ?? '', true);
+$raw_logout_url = $_GET['logoutUrl'] ?? '';
+$decoded_logout_urls = is_string($raw_logout_url) ? json_decode($raw_logout_url, true) : null;
 $logout_urls = is_array($decoded_logout_urls) ? array_values(array_filter($decoded_logout_urls, 'is_string')) : [];
 
-$redirect = json_encode((string) ($_GET['redirect'] ?? ''), JSON_ENCODE_FOR_SCRIPT);
+$raw_redirect = $_GET['redirect'] ?? '';
+$redirect = json_encode(is_string($raw_redirect) ? $raw_redirect : '', JSON_ENCODE_FOR_SCRIPT);
 ?>
 
 <script>
